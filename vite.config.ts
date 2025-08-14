@@ -1,5 +1,5 @@
 import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
+import react from '@vitejs/plugin-react-swc'
 // Note: using Tailwind via PostCSS (postcss.config.js). Remove v4 vite plugin.
 import { fileURLToPath, URL } from 'node:url'
 
