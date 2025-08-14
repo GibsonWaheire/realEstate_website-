@@ -22,14 +22,14 @@ const HomePage = () => {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative flex h-[75vh] items-center justify-center overflow-hidden rounded-b-[2rem]">
+      <section className="relative flex h-[82vh] items-center justify-center overflow-hidden">
         <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{
             backgroundImage: `url(${heroImageUrl})`
           }}
         />
-        <div className="absolute inset-0 hero-gradient" />
+        <div className="absolute inset-0 hero-overlay" />
         
         {/* Floating Elements */}
         <div className="absolute left-8 top-16 size-16 rounded-full bg-luxury-gold/20 animate-float" />
@@ -37,28 +37,36 @@ const HomePage = () => {
         <div className="absolute right-16 top-1/3 size-8 rounded-full bg-luxury-gold/30 animate-float" style={{ animationDelay: '4s' }} />
 
         <div className="relative z-10 mx-auto max-w-5xl px-4 text-center text-white">
-          <div className="mb-2 text-4xl font-serif font-bold text-foreground/30 md:text-6xl">
+          <div className="mb-3 animate-[fade-up_0.7s_ease-out_forwards] text-5xl font-serif font-bold text-white/30 md:text-7xl">
             Find Your Dream
           </div>
-          <h1 className="mb-4 text-5xl font-serif font-bold text-luxury-gold md:text-7xl">
+          <h1 className="typewriter mx-auto mb-5 max-w-[20ch] text-6xl font-serif font-bold text-luxury-gold md:text-8xl">
             Luxury Home
           </h1>
           <p className="mx-auto mb-8 max-w-2xl text-lg opacity-90 md:text-xl">
             Discover exceptional properties in the world's most prestigious locations
           </p>
           <div className="flex flex-col justify-center gap-4 sm:flex-row">
-            <Button size="lg" className="bg-gradient-gold px-8 font-semibold text-luxury-navy hover:bg-luxury-gold-dark">
-              Browse Properties
-              <ArrowRight className="ml-2 h-5 w-5" />
+            <Button asChild size="lg" variant="gold" className="group relative overflow-hidden rounded-full px-10 py-6 text-base md:text-lg font-semibold text-slate-900 shadow-xl transition-transform duration-300 hover:scale-105 active:scale-100">
+              <Link to="/properties">
+                <span className="relative z-10 flex items-center">
+                  Browse Properties
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </span>
+                <span className="pointer-events-none absolute inset-0 -left-full z-0 h-full w-1/2 -skew-x-12 bg-white/25 opacity-0 transition-all duration-700 group-hover:left-full group-hover:opacity-100" />
+              </Link>
             </Button>
-            <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-luxury-navy">
-              Contact Agent
+            <Button asChild size="lg" variant="gold" className="group relative overflow-hidden rounded-full px-10 py-6 text-base md:text-lg font-semibold text-slate-900 shadow-xl transition-transform duration-300 hover:scale-105 active:scale-100">
+              <a href="tel:+1555123LUXURY">
+                <span className="relative z-10">Call (555) 123-LUXURY</span>
+                <span className="pointer-events-none absolute inset-0 -left-full z-0 h-full w-1/2 -skew-x-12 bg-white/25 opacity-0 transition-all duration-700 group-hover:left-full group-hover:opacity-100" />
+              </a>
             </Button>
           </div>
         </div>
 
         {/* Scroll Indicator */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+        <div className="bounce-slow absolute bottom-8 left-1/2 -translate-x-1/2">
           <div className="w-6 h-10 border-2 border-white rounded-full flex justify-center">
             <div className="w-1 h-3 bg-white rounded-full mt-2 animate-pulse" />
           </div>
@@ -83,20 +91,31 @@ const HomePage = () => {
       </section>
 
       {/* Stats Section */}
-      <section className="py-16 bg-luxury-navy">
+      <section className="bg-luxury-navy py-16">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+          <div className="grid grid-cols-2 gap-6 md:grid-cols-4 md:gap-8">
             {stats.map((stat, index) => (
               <div
                 key={stat.label}
-                className="text-center text-white animate-fade-in"
-                style={{ animationDelay: `${index * 0.1}s` }}
+                className="group relative overflow-hidden rounded-2xl bg-white/5 p-6 text-center text-white ring-1 ring-white/10 transition-all duration-300 animate-fade-in hover:-translate-y-1 hover:bg-white/10 hover:ring-white/20"
+                style={{ animationDelay: `${index * 0.08}s` }}
               >
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-luxury-gold rounded-full mb-4">
-                  <stat.icon className="w-8 h-8 text-luxury-navy" />
+                {/* Shine sweep */}
+                <span className="pointer-events-none absolute -left-20 top-0 h-full w-20 rotate-12 bg-white/10 opacity-0 blur-lg transition-all duration-700 group-hover:left-[120%] group-hover:opacity-100" />
+
+                {/* Icon */}
+                <div className="mx-auto mb-4 grid h-16 w-16 place-items-center rounded-full bg-gradient-to-br from-amber-400 to-yellow-500 text-luxury-navy shadow-md transition-transform duration-300 group-hover:scale-110">
+                  <stat.icon className="h-8 w-8" />
                 </div>
-                <div className="text-3xl md:text-4xl font-bold mb-2">{stat.value}</div>
-                <div className="text-gray-300">{stat.label}</div>
+
+                {/* Value */}
+                <div className="mb-1 bg-gradient-to-r from-amber-200 to-yellow-400 bg-clip-text text-3xl font-extrabold text-transparent md:text-4xl">
+                  {stat.value}
+                </div>
+                <div className="text-white/80">{stat.label}</div>
+
+                {/* Accent bar */}
+                <span className="pointer-events-none absolute inset-x-0 bottom-0 h-1 bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
               </div>
             ))}
           </div>
@@ -128,19 +147,27 @@ const HomePage = () => {
           </div>
 
           <div className="text-center">
-            <Link to="/properties">
-              <Button size="lg" className="bg-gradient-luxury text-white hover:bg-luxury-navy-light">
-                View All Properties
-                <ArrowRight className="ml-2 w-5 h-5" />
-              </Button>
-            </Link>
+            <Button
+              asChild
+              size="lg"
+              variant="gold"
+              className="group relative rounded-full px-8 py-4 font-semibold text-slate-900 shadow-xl"
+            >
+              <Link to="/properties">
+                <span className="relative z-10 inline-flex items-center">
+                  View All Properties
+                  <ArrowRight className="ml-2 w-5 h-5" />
+                </span>
+                <span className="pointer-events-none absolute inset-0 -left-full z-0 h-full w-1/2 -skew-x-12 bg-white/25 opacity-0 transition-all duration-700 group-hover:left-full group-hover:opacity-100" />
+              </Link>
+            </Button>
           </div>
         </div>
       </section>
 
       {/* CTA Section */}
       <section className="py-20 bg-gradient-luxury text-white">
-        <div className="container mx-auto px-4 text-center">
+          <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl md:text-4xl font-serif font-bold mb-6">
             Ready to Find Your Dream Home?
           </h2>
@@ -148,11 +175,27 @@ const HomePage = () => {
             Let our expert agents guide you through the luxury real estate market
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="bg-luxury-gold text-luxury-navy hover:bg-luxury-gold-dark">
-              Schedule Consultation
+            <Button
+              asChild
+              size="lg"
+              variant="gold"
+              className="group relative overflow-hidden rounded-full px-8 py-4 font-semibold text-slate-900 shadow-xl transition-transform duration-300 hover:scale-105 active:scale-100"
+            >
+              <Link to="/contact">
+                <span className="relative z-10">Schedule Consultation</span>
+                <span className="pointer-events-none absolute inset-0 -left-full z-0 h-full w-1/2 -skew-x-12 bg-white/25 opacity-0 transition-all duration-700 group-hover:left-full group-hover:opacity-100" />
+              </Link>
             </Button>
-            <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-luxury-navy">
-              Call (555) 123-LUXURY
+            <Button
+              asChild
+              size="lg"
+              variant="gold"
+              className="group relative overflow-hidden rounded-full px-8 py-4 font-semibold text-slate-900 shadow-xl transition-transform duration-300 hover:scale-105 active:scale-100"
+            >
+              <a href="tel:+1555123LUXURY">
+                <span className="relative z-10">Call (555) 123-LUXURY</span>
+                <span className="pointer-events-none absolute inset-0 -left-full z-0 h-full w-1/2 -skew-x-12 bg-white/25 opacity-0 transition-all duration-700 group-hover:left-full group-hover:opacity-100" />
+              </a>
             </Button>
           </div>
         </div>
