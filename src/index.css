@@ -121,3 +121,14 @@ body { @apply bg-background text-foreground font-sans antialiased; }
   border-right: 2px solid #fff;
   animation: type 2.2s steps(20, end) forwards, caret .9s step-end infinite;
 }
+
+/* Hero slideshow */
+@keyframes kenburns {
+  0% { transform: scale(1.05) translateY(0); }
+  100% { transform: scale(1.12) translateY(-1.5%); }
+}
+
+.kenburns {
+  animation: kenburns 16s ease-in-out forwards;
+  will-change: transform;
+}

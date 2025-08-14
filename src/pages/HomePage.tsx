@@ -1,14 +1,32 @@
-import { } from 'react';
+import * as React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Star, Users, Award, TrendingUp } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import SearchBar from '@/components/SearchBar';
 import PropertyCard from '@/components/PropertyCard';
 import { mockProperties } from '@/data/properties';
-const heroImageUrl = 'https://images.unsplash.com/photo-1501183638710-841dd1904471?q=80&w=1920&auto=format&fit=crop';
+const heroImages = [
+  'https://images.unsplash.com/photo-1501183638710-841dd1904471?q=80&w=1920&auto=format&fit=crop',
+  'https://images.unsplash.com/photo-1613490493576-7fde63acd811?q=80&w=1920&auto=format&fit=crop',
+  'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?q=80&w=1920&auto=format&fit=crop',
+  'https://images.unsplash.com/photo-1571896349842-33c89424de2d?q=80&w=1920&auto=format&fit=crop',
+]
 
 const HomePage = () => {
   const handleSearch = () => {};
+
+  const [slide, setSlide] = React.useState(0)
+  React.useEffect(() => {
+    // Preload next images
+    heroImages.forEach((src) => {
+      const img = new Image()
+      img.src = src
+    })
+    const id = setInterval(() => {
+      setSlide((s) => (s + 1) % heroImages.length)
+    }, 6000)
+    return () => clearInterval(id)
+  }, [])
 
   const featuredProperties = mockProperties.slice(0, 3);
 
@@ -23,13 +41,20 @@ const HomePage = () => {
     <div className="min-h-screen">
       {/* Hero Section */}
       <section className="relative flex h-[82vh] items-center justify-center overflow-hidden">
-        <div
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{
-            backgroundImage: `url(${heroImageUrl})`
-          }}
-        />
-        <div className="absolute inset-0 hero-overlay" />
+        {/* Slideshow */}
+        {heroImages.map((src, idx) => (
+          <div
+            key={src}
+            className={
+              'absolute inset-0 bg-cover bg-center will-change-transform kenburns transition-opacity duration-1000 ease-out ' +
+              (idx === slide ? 'opacity-100' : 'opacity-0')
+            }
+            style={{ backgroundImage: `url(${src})` }}
+            aria-hidden={idx !== slide}
+          />
+        ))}
+        {/* Readability overlay */}
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-black/40 to-black/70" />
         
         {/* Floating Elements */}
         <div className="absolute left-8 top-16 size-16 rounded-full bg-luxury-gold/20 animate-float" />
