@@ -58,7 +58,7 @@ const Header = (): React.ReactElement => {
               variant="gold"
               className="rounded-full px-6 py-3 text-sm md:text-base shadow-lg focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-2"
             >
-              <Link to="/properties">Get Started <ArrowRight className="ml-2 h-4 w-4" /></Link>
+              <Link to="/get-started">Get Started <ArrowRight className="ml-2 h-4 w-4" /></Link>
             </Button>
           </div>
 
@@ -103,7 +103,7 @@ const Header = (): React.ReactElement => {
                   variant="gold"
                   className="w-full rounded-full px-6 py-3 text-sm shadow-lg focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-2"
                 >
-                  <Link to="/properties">Get Started <ArrowRight className="ml-2 h-4 w-4" /></Link>
+                  <Link to="/get-started">Get Started <ArrowRight className="ml-2 h-4 w-4" /></Link>
                 </Button>
               </div>
             </nav>
