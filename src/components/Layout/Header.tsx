@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { Menu, X, Home, Search, Users, Phone, Info, ArrowRight } from 'lucide-react'
+import { Menu, X, Home, Search, Users, Phone, Info, BookOpen, ArrowRight } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 
 const Header = (): React.ReactElement => {
@@ -11,6 +11,7 @@ const Header = (): React.ReactElement => {
     { name: 'Home', href: '/', icon: Home },
     { name: 'Properties', href: '/properties', icon: Search },
     { name: 'Agents', href: '/agents', icon: Users },
+    { name: 'Blog', href: '/blog', icon: BookOpen },
     { name: 'About', href: '/about', icon: Info },
     { name: 'Contact', href: '/contact', icon: Phone },
   ]

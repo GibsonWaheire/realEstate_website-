@@ -4,6 +4,7 @@ import { ArrowRight, Star, Users, Award, TrendingUp } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import SearchBar from '@/components/SearchBar';
 import PropertyCard from '@/components/PropertyCard';
+import TestimonialsSection from '@/components/TestimonialsSection';
 import { mockProperties } from '@/data/properties';
 const heroImages = [
   'https://images.unsplash.com/photo-1501183638710-841dd1904471?q=80&w=1920&auto=format&fit=crop',
@@ -190,6 +191,8 @@ const HomePage = () => {
         </div>
       </section>
 
+      {/* Testimonials Section */}
+      <TestimonialsSection />
 
     </div>
   );

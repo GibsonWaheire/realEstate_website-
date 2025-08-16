@@ -7,10 +7,13 @@
     "dev": "vite",
     "build": "vite build",
     "build:dev": "vite build --mode development",
+    "build:github": "DEPLOY_ENV=github-pages vite build",
+    "build:netlify": "DEPLOY_ENV=netlify vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "predeploy": "npm run build:github",
+    "deploy": "gh-pages -d dist",
+    "deploy:netlify": "npm run build:netlify"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",

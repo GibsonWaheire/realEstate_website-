@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ChevronLeft, ChevronRight, Bed, Bath, Square, MapPin, Heart } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Bed, Bath, Square, MapPin, Heart, Scale, Check } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+import { useComparison } from '@/contexts/ComparisonContext';
+import { useFavorites } from '@/contexts/FavoritesContext';
 import type { Property } from '@/data/properties';
 
 interface PropertyCardProps {
@@ -11,7 +13,8 @@ interface PropertyCardProps {
 
 const PropertyCard = ({ property }: PropertyCardProps) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [isLiked, setIsLiked] = useState(false);
+  const { addToComparison, isInComparison, canAddMore } = useComparison();
+  const { addToFavorites, removeFromFavorites, isFavorite } = useFavorites();
 
   const nextImage = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -73,18 +76,51 @@ const PropertyCard = ({ property }: PropertyCardProps) => {
           {property.type}
         </Badge>
 
-        {/* Like Button */}
-        <Button
-          variant="ghost"
-          size="icon"
-          className="absolute top-4 right-4 bg-white/80 hover:bg-white"
-          onClick={(e) => {
-            e.preventDefault();
-            setIsLiked(!isLiked);
-          }}
-        >
-          <Heart className={`w-4 h-4 ${isLiked ? 'fill-red-500 text-red-500' : 'text-gray-600'}`} />
-        </Button>
+        {/* Action Buttons */}
+        <div className="absolute top-4 right-4 flex space-x-2">
+          {/* Comparison Button */}
+          <Button
+            variant="ghost"
+            size="icon"
+            className={`bg-white/80 hover:bg-white ${
+              isInComparison(property.id) 
+                ? 'text-luxury-gold' 
+                : canAddMore 
+                  ? 'text-gray-600 hover:text-luxury-gold' 
+                  : 'text-gray-400 cursor-not-allowed'
+            }`}
+            onClick={(e) => {
+              e.preventDefault();
+              if (canAddMore && !isInComparison(property.id)) {
+                addToComparison(property);
+              }
+            }}
+            disabled={!canAddMore && !isInComparison(property.id)}
+          >
+            {isInComparison(property.id) ? (
+              <Check className="w-4 h-4" />
+            ) : (
+              <Scale className="w-4 h-4" />
+            )}
+          </Button>
+
+          {/* Like Button */}
+          <Button
+            variant="ghost"
+            size="icon"
+            className="bg-white/80 hover:bg-white"
+            onClick={(e) => {
+              e.preventDefault();
+              if (isFavorite(property.id)) {
+                removeFromFavorites(property.id);
+              } else {
+                addToFavorites(property);
+              }
+            }}
+          >
+            <Heart className={`w-4 h-4 ${isFavorite(property.id) ? 'fill-red-500 text-red-500' : 'text-gray-600'}`} />
+          </Button>
+        </div>
 
         {/* Image Indicators */}
         {property.images.length > 1 && (
