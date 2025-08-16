@@ -190,41 +190,7 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 bg-gradient-luxury text-white">
-          <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl md:text-4xl font-serif font-bold mb-6">
-            Ready to Find Your Dream Home?
-          </h2>
-          <p className="text-xl mb-8 opacity-90 max-w-2xl mx-auto">
-            Let our expert agents guide you through the luxury real estate market
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button
-              asChild
-              size="lg"
-              variant="gold"
-              className="group relative overflow-hidden rounded-full px-8 py-4 font-semibold text-slate-900 shadow-xl transition-transform duration-300 hover:scale-105 active:scale-100"
-            >
-              <Link to="/contact">
-                <span className="relative z-10">Schedule Consultation</span>
-                <span className="pointer-events-none absolute inset-0 -left-full z-0 h-full w-1/2 -skew-x-12 bg-white/25 opacity-0 transition-all duration-700 group-hover:left-full group-hover:opacity-100" />
-              </Link>
-            </Button>
-            <Button
-              asChild
-              size="lg"
-              variant="gold"
-              className="group relative overflow-hidden rounded-full px-8 py-4 font-semibold text-slate-900 shadow-xl transition-transform duration-300 hover:scale-105 active:scale-100"
-            >
-              <a href="tel:+1555123LUXURY">
-                <span className="relative z-10">Call (555) 123-LUXURY</span>
-                <span className="pointer-events-none absolute inset-0 -left-full z-0 h-full w-1/2 -skew-x-12 bg-white/25 opacity-0 transition-all duration-700 group-hover:left-full group-hover:opacity-100" />
-              </a>
-            </Button>
-          </div>
-        </div>
-      </section>
+
     </div>
   );
 };
