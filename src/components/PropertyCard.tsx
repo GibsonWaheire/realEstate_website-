@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { ChevronLeft, ChevronRight, Bed, Bath, Square, MapPin, Heart, Scale, Check } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { useComparison } from '@/contexts/ComparisonContext';
+import { useComparison } from '@/hooks/useComparison';
 import { useFavorites } from '@/contexts/FavoritesContext';
 import type { Property } from '@/data/properties';
 

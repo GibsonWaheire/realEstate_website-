@@ -1,13 +1,13 @@
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import React, { createContext, useContext, useState, useEffect, type ReactNode } from 'react';
 
 interface Property {
   id: string;
   title: string;
-  price: string;
+  price: number;
   location: string;
   bedrooms: number;
   bathrooms: number;
-  sqft: string;
+  sqft: number;
   type: string;
   images: string[];
   description: string;
@@ -65,7 +65,7 @@ export const FavoritesProvider: React.FC<FavoritesProviderProps> = ({ children }
       if (typeof window !== 'undefined' && window.gtag) {
         window.gtag('event', 'add_to_favorites', {
           currency: 'USD',
-          value: parseInt(property.price.replace(/[^0-9]/g, '')) || 0,
+          value: property.price,
           item_id: property.id,
           item_name: property.title,
           item_category: property.type,

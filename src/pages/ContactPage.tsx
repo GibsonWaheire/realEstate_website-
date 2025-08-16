@@ -1,15 +1,14 @@
 import * as React from 'react';
-import { MapPin, Phone, Mail, Clock, Send, MessageSquare, Calendar, User } from 'lucide-react';
+import { MapPin, Phone, Mail, Clock, Send, MessageSquare, Calendar } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { useToast } from '@/hooks/use-toast';
+import { toast } from '@/hooks/use-toast';
 
 const ContactPage = () => {
-  const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = React.useState(false);
   const [formData, setFormData] = React.useState({
     firstName: '',
@@ -55,11 +54,10 @@ const ContactPage = () => {
         preferredContact: '',
         propertyType: ''
       });
-    } catch (error) {
+    } catch {
       toast({
         title: "Error",
         description: "There was a problem sending your message. Please try again.",
-        variant: "destructive",
       });
     } finally {
       setIsSubmitting(false);

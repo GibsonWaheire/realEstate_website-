@@ -1,13 +1,20 @@
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import React, { createContext, useState, type ReactNode } from 'react';
+
+// Extend Window interface for analytics functions
+declare global {
+  interface Window {
+    trackPropertyComparison?: (propertyIds: string[]) => void;
+  }
+}
 
 interface Property {
   id: string;
   title: string;
-  price: string;
+  price: number;
   location: string;
   bedrooms: number;
   bathrooms: number;
-  sqft: string;
+  sqft: number;
   type: string;
   images: string[];
   description: string;
@@ -23,15 +30,7 @@ interface ComparisonContextType {
   canAddMore: boolean;
 }
 
-const ComparisonContext = createContext<ComparisonContextType | undefined>(undefined);
-
-export const useComparison = () => {
-  const context = useContext(ComparisonContext);
-  if (!context) {
-    throw new Error('useComparison must be used within a ComparisonProvider');
-  }
-  return context;
-};
+export const ComparisonContext = createContext<ComparisonContextType | undefined>(undefined);
 
 interface ComparisonProviderProps {
   children: ReactNode;

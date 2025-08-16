@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Scale, X, Eye } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { useComparison } from '@/contexts/ComparisonContext';
+import { useComparison } from '@/hooks/useComparison';
 
 const ComparisonBar: React.FC = () => {
   const { comparedProperties, removeFromComparison, clearComparison } = useComparison();

@@ -1,9 +1,16 @@
 import React from 'react';
 import { X, Home, Bed, Bath, Square, MapPin, DollarSign } from 'lucide-react';
+
+// Extend Window interface for analytics functions
+declare global {
+  interface Window {
+    trackPropertyView?: (propertyId: string, propertyType: string, price: number) => void;
+  }
+}
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { useComparison } from '@/contexts/ComparisonContext';
+import { useComparison } from '@/hooks/useComparison';
 
 const PropertyComparison: React.FC = () => {
   const { comparedProperties, removeFromComparison, clearComparison } = useComparison();
@@ -101,7 +108,14 @@ const PropertyComparison: React.FC = () => {
                     <DollarSign className="h-5 w-5 text-luxury-gold mr-2" />
                     <span className="text-sm text-luxury-gray">Price</span>
                   </div>
-                  <span className="font-bold text-luxury-navy">{property.price}</span>
+                  <span className="font-bold text-luxury-navy">
+                    {new Intl.NumberFormat('en-US', {
+                      style: 'currency',
+                      currency: 'USD',
+                      minimumFractionDigits: 0,
+                      maximumFractionDigits: 0,
+                    }).format(property.price)}
+                  </span>
                 </div>
 
                 {/* Key Features */}
@@ -118,7 +132,7 @@ const PropertyComparison: React.FC = () => {
                   </div>
                   <div className="text-center p-3 bg-luxury-light rounded-lg">
                     <Square className="h-5 w-5 text-luxury-gold mx-auto mb-1" />
-                    <div className="font-semibold text-luxury-navy">{property.sqft}</div>
+                    <div className="font-semibold text-luxury-navy">{property.sqft.toLocaleString()}</div>
                     <div className="text-xs text-luxury-gray">Sq Ft</div>
                   </div>
                 </div>
@@ -160,8 +174,7 @@ const PropertyComparison: React.FC = () => {
                   onClick={() => {
                     // Track property view
                     if (typeof window !== 'undefined' && window.trackPropertyView) {
-                      const price = parseInt(property.price.replace(/[^0-9]/g, ''));
-                      window.trackPropertyView(property.id, property.type, price);
+                      window.trackPropertyView(property.id, property.type, property.price);
                     }
                   }}
                 >
@@ -198,7 +211,12 @@ const PropertyComparison: React.FC = () => {
                       <td className="py-4 px-2 font-medium text-luxury-gray">Price</td>
                       {comparedProperties.map((property) => (
                         <td key={property.id} className="py-4 px-2 text-center font-bold text-luxury-navy">
-                          {property.price}
+                          {new Intl.NumberFormat('en-US', {
+                            style: 'currency',
+                            currency: 'USD',
+                            minimumFractionDigits: 0,
+                            maximumFractionDigits: 0,
+                          }).format(property.price)}
                         </td>
                       ))}
                     </tr>
@@ -230,7 +248,7 @@ const PropertyComparison: React.FC = () => {
                       <td className="py-4 px-2 font-medium text-luxury-gray">Square Feet</td>
                       {comparedProperties.map((property) => (
                         <td key={property.id} className="py-4 px-2 text-center text-luxury-navy">
-                          {property.sqft}
+                          {property.sqft.toLocaleString()} sq ft
                         </td>
                       ))}
                     </tr>

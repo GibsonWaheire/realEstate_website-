@@ -3,7 +3,7 @@
 **A sophisticated luxury real estate website showcasing advanced React development and modern web technologies**
 
 ## 🌐 **Live Demo**
-**View Live Project**: [https://gibsonwaheire.github.io/realEstate_website-/](https://gibsonwaheire.github.io/realEstate_website-/)
+**View Live Project**: [https://realestate-site-demo.netlify.app/](https://realestate-site-demo.netlify.app/)
 
 ---
 
