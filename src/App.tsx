@@ -8,6 +8,9 @@ import Footer from "@/components/Layout/Footer";
 import CallToAction from "@/components/CallToAction";
 import HomePage from "./pages/HomePage";
 import PropertiesPage from "./pages/PropertiesPage";
+import AgentsPage from "./pages/AgentsPage";
+import AboutPage from "./pages/AboutPage";
+import ContactPage from "./pages/ContactPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -24,9 +27,9 @@ const App = () => (
             <Routes>
               <Route path="/" element={<HomePage />} />
               <Route path="/properties" element={<PropertiesPage />} />
-              <Route path="/agents" element={<div className="pt-20 p-8 text-center"><h1 className="text-3xl font-bold">Agents Page Coming Soon</h1></div>} />
-              <Route path="/about" element={<div className="pt-20 p-8 text-center"><h1 className="text-3xl font-bold">About Page Coming Soon</h1></div>} />
-              <Route path="/contact" element={<div className="pt-20 p-8 text-center"><h1 className="text-3xl font-bold">Contact Page Coming Soon</h1></div>} />
+              <Route path="/agents" element={<AgentsPage />} />
+              <Route path="/about" element={<AboutPage />} />
+              <Route path="/contact" element={<ContactPage />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>
